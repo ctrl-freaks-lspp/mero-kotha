@@ -17,7 +17,11 @@ import { useRouter } from "next/navigation";
 import ListingForm from "./listingForm";
 import { useState } from "react";
 
-export default function ProfileMenu({ picLink }: { picLink: string | undefined }) {
+export default function ProfileMenu({
+  picLink,
+}: {
+  picLink: string | undefined;
+}) {
   console.log("piclink from navbar: ", picLink);
   const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -136,7 +140,10 @@ export default function ProfileMenu({ picLink }: { picLink: string | undefined }
         </MenuItem>
       </Menu>
 
-      <ListingForm openDialog={openDialog} handleCloseDialog={handleCloseDialog} />
+      <ListingForm
+        openDialog={openDialog}
+        handleCloseDialog={handleCloseDialog}
+      />
     </React.Fragment>
   );
 }

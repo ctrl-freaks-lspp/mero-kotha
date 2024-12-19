@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Stack, SvgIconProps, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid,
+  Stack,
+  SvgIconProps,
+  Typography,
+} from "@mui/material";
 
 export default function FeatureCard({
   title,
@@ -12,8 +19,18 @@ export default function FeatureCard({
   return (
     <Grid item width="50%">
       <Container sx={{ backgroundColor: "white", borderRadius: 2 }}>
-        <Stack alignItems="flex-start" justifyContent="space-between" gap={2} paddingY={2}>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ width: "100%" }}>
+        <Stack
+          alignItems="flex-start"
+          justifyContent="space-between"
+          gap={2}
+          paddingY={2}
+        >
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ width: "100%" }}
+          >
             <Typography color="#8f98a5" fontSize={18}>
               {title}
             </Typography>

@@ -3,7 +3,16 @@
 import { useAuth } from "@/app/utils/context/authContext";
 // import { useRouter } from "next/router";
 import { redirect, useRouter } from "next/navigation";
-import { Container, Stack, Typography, Button, Box, TextField, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Container,
+  Stack,
+  Typography,
+  Button,
+  Box,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import { useState } from "react";
 import { Toast, ToastBox } from "@/app/components/toast";
 import HeaderBox from "@/app/components/headerBox";
@@ -87,7 +96,7 @@ export default function Register() {
         const response = await axios.post(
           `${BACKEND}/user/register/`,
           { name, email, password, phone },
-          { withCredentials: true }
+          { withCredentials: true },
         );
         if (response.status === 201) {
           Toast("success", "Registered Successfully!");
@@ -105,19 +114,29 @@ export default function Register() {
       <HeaderBox title="Register" />
 
       <Container maxWidth="lg" sx={{ paddingX: 10, marginY: 10 }}>
-        <Stack direction="row" alignItems="start" justifyContent="space-between">
+        <Stack
+          direction="row"
+          alignItems="start"
+          justifyContent="space-between"
+        >
           <Container>
             <Typography variant="h4" mb={2}>
               Sign up
             </Typography>
             <Typography variant="subtitle1">
-              Unlock access to exclusive listings by creating your account today! Join our real estate community and
-              discover your dream home. <br />
+              Unlock access to exclusive listings by creating your account
+              today! Join our real estate community and discover your dream
+              home. <br />
               Already have an account?
             </Typography>
             <Button
               variant="text"
-              sx={{ color: "#fb6749", textTransform: "capitalize", paddingX: 0, justifyContent: "start" }}
+              sx={{
+                color: "#fb6749",
+                textTransform: "capitalize",
+                paddingX: 0,
+                justifyContent: "start",
+              }}
               onClick={() => router.push("/login")}
             >
               Login

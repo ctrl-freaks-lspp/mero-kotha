@@ -1,4 +1,13 @@
-import { Card, CardActionArea, CardActions, CardContent, CardMedia, Chip, Stack, Typography } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Chip,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { BACKEND } from "../utils/constants";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import HotelIcon from "@mui/icons-material/Hotel";
@@ -12,7 +21,11 @@ import { useRouter } from "next/navigation";
 export default function ListingCard({ listing }: any) {
   const router = useRouter();
   return (
-    <Card sx={{ width: 365, borderRadius: 2 }} key={listing.id} onClick={() => router.push("/listings/" + listing.id)}>
+    <Card
+      sx={{ width: 365, borderRadius: 2 }}
+      key={listing.id}
+      onClick={() => router.push("/listings/" + listing.id)}
+    >
       <CardActionArea>
         <CardMedia
           component="img"
@@ -21,8 +34,17 @@ export default function ListingCard({ listing }: any) {
           alt="property image"
         />
         <CardContent>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" marginY={1.5} marginX={0}>
-            <Chip label="For Sale" sx={{ backgroundColor: "#fb6749", color: "white" }} />
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            marginY={1.5}
+            marginX={0}
+          >
+            <Chip
+              label="For Sale"
+              sx={{ backgroundColor: "#fb6749", color: "white" }}
+            />
             <Typography textTransform="capitalize">{listing.type}</Typography>
           </Stack>
           <Typography variant="h5">{listing.title}</Typography>
@@ -30,8 +52,14 @@ export default function ListingCard({ listing }: any) {
             Rs. {Number(listing.price).toLocaleString("en-IN")}
           </Typography>
         </CardContent>
-        <CardContent sx={{ marginX: 2.5, border: 2, color: "#e9eaeb", borderRadius: 1.2 }}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <CardContent
+          sx={{ marginX: 2.5, border: 2, color: "#e9eaeb", borderRadius: 1.2 }}
+        >
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Stack direction="row" alignItems="center" gap={2}>
               <CorporateFareIcon sx={{ color: "#282e38" }} />
               <Typography color="#282e38">{listing.area}</Typography>
@@ -46,7 +74,12 @@ export default function ListingCard({ listing }: any) {
             </Stack>
           </Stack>
 
-          <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ marginTop: 2 }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{ marginTop: 2 }}
+          >
             <Stack direction="row" alignItems="center" gap={2}>
               <KitchenIcon sx={{ color: "#282e38" }} />
               <Typography color="#282e38">{listing.kitchen}</Typography>

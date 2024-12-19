@@ -3,7 +3,17 @@
 import { BACKEND } from "../utils/constants";
 import { useEffect, useRef, useState } from "react";
 import { socket } from "./socket";
-import { Avatar, Box, Button, Container, Divider, Paper, Stack, TextField, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Divider,
+  Paper,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useAuth } from "../utils/context/authContext";
 import HeaderBox from "../components/headerBox";
 import { UserType } from "../interface/userType";
@@ -164,7 +174,11 @@ export default function Chat() {
               // marginY={4}
               minWidth="30%"
               // maxWidth="30%"
-              sx={{ border: "1px solid black", borderRadius: "10px 0 0 10px", padding: 4 }}
+              sx={{
+                border: "1px solid black",
+                borderRadius: "10px 0 0 10px",
+                padding: 4,
+              }}
             >
               {myRooms.length > 0 &&
                 user &&
@@ -187,7 +201,10 @@ export default function Chat() {
                                 joinRoom(room);
                               }}
                             >
-                              <Avatar alt="user avatar" src={`${BACKEND}/uploads/avatars/${Seluser.avatar}`} />
+                              <Avatar
+                                alt="user avatar"
+                                src={`${BACKEND}/uploads/avatars/${Seluser.avatar}`}
+                              />
                               <Typography>{Seluser.name}</Typography>
                             </Stack>
                           </React.Fragment>
@@ -215,12 +232,27 @@ export default function Chat() {
               style={{ padding: 0 }}
             >
               {!selectedRoom ? (
-                <Stack alignItems="center" justifyContent="center" height="100%">
+                <Stack
+                  alignItems="center"
+                  justifyContent="center"
+                  height="100%"
+                >
                   <Typography>No Rooms Selected!</Typography>
                 </Stack>
               ) : (
-                <Stack paddingBottom="75px" sx={{ maxHeight: "80vh", overflowY: "scroll" }} ref={messagesEndRef}>
-                  <Box sx={{ padding: 4, backgroundColor: "#282e38", color: "white", marginBottom: 2 }}>
+                <Stack
+                  paddingBottom="75px"
+                  sx={{ maxHeight: "80vh", overflowY: "scroll" }}
+                  ref={messagesEndRef}
+                >
+                  <Box
+                    sx={{
+                      padding: 4,
+                      backgroundColor: "#282e38",
+                      color: "white",
+                      marginBottom: 2,
+                    }}
+                  >
                     <Typography>
                       ({selectedRoom.id}) {selectedRoom.name}
                     </Typography>
@@ -246,14 +278,17 @@ export default function Chat() {
                             padding: 2,
                             marginRight: 2,
                             marginBottom: 2,
-                            backgroundColor: msg.user.id === user?.id ? "#fb6749" : "#7fcfdf",
+                            backgroundColor:
+                              msg.user.id === user?.id ? "#fb6749" : "#7fcfdf",
                             color: msg.user.id === user?.id ? "white" : "black",
                             // marginLeft: "auto",
                             // marginLeft: {msg.user.id === user.id ? "auto" : "none"},
                           }}
                           // alignItems="flex-end"
                         >
-                          <Typography sx={{ fontStyle: "italic" }}>{msg.user.name}</Typography>
+                          <Typography sx={{ fontStyle: "italic" }}>
+                            {msg.user.name}
+                          </Typography>
                           <Typography>{msg.text}</Typography>
                           {/* <Divider /> */}
                         </Stack>

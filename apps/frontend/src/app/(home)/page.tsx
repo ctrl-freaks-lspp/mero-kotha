@@ -1,13 +1,7 @@
 "use client";
 
 import { useAuth } from "../utils/context/authContext";
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import BounceLoader from "react-spinners/BounceLoader";
 import { useRouter } from "next/navigation";
@@ -52,7 +46,9 @@ export default function HomePage() {
     <>
       {/* <Navbar /> */}
       <Box sx={{ width: "100%", height: "100vh", overflow: "hidden" }}>
-        <Box sx={{ top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }}>
+        <Box
+          sx={{ top: 0, left: 0, width: "100%", height: "100%", zIndex: -1 }}
+        >
           <Box
             component="div"
             sx={{
@@ -86,13 +82,18 @@ export default function HomePage() {
         </Box>
       </Box>
       <Container maxWidth="lg" sx={{ paddingX: 10, marginY: 10 }}>
-        <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Stack gap={1}>
             <Typography variant="h3" fontWeight="bold">
               Latest Room Listings
             </Typography>
             <Typography variant="subtitle1">
-              Our latest listings at a glance. Explore Rooms from all sizes and types
+              Our latest listings at a glance. Explore Rooms from all sizes and
+              types
             </Typography>
           </Stack>
           <Button
@@ -120,7 +121,12 @@ export default function HomePage() {
 
         {/* <LatestListingCard latestListings={latestListings} /> */}
 
-        <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" marginY={5}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          alignItems="center"
+          justifyContent="space-between"
+          marginY={5}
+        >
           {latestListings &&
             latestListings.map((item: any) => {
               return <ListingCard key={item.id} listing={item} />;

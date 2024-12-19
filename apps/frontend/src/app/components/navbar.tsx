@@ -84,7 +84,13 @@ export default function Navbar() {
             Scroll to elevate App bar
           </Typography> */}
         <Stack justifyContent="center" alignItems="center" direction="row">
-          <Stack direction="row" justifyContent="space-between" alignItems="center" padding={3} width="70%">
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            padding={3}
+            width="70%"
+          >
             <Stack
               direction="row"
               alignItems="center"
@@ -92,12 +98,22 @@ export default function Navbar() {
               onClick={() => router.push("/")}
               sx={{ cursor: "pointer" }}
             >
-              <Image src="/home_logo.png" alt="home logo" height={56} width={56} />
+              <Image
+                src="/home_logo.png"
+                alt="home logo"
+                height={56}
+                width={56}
+              />
               <Typography variant="h6" color="white">
                 MeroKotha
               </Typography>
             </Stack>
-            <Stack direction="row" justifyContent="space-evenly" alignItems="center" gap={3}>
+            <Stack
+              direction="row"
+              justifyContent="space-evenly"
+              alignItems="center"
+              gap={3}
+            >
               {user?.role === 1 &&
                 adminNavItems.map((item) => {
                   return (
@@ -118,7 +134,11 @@ export default function Navbar() {
                         },
                       }}
                     >
-                      <Typography variant="subtitle1" color="white" textTransform="capitalize">
+                      <Typography
+                        variant="subtitle1"
+                        color="white"
+                        textTransform="capitalize"
+                      >
                         {item.name}
                       </Typography>
                     </Button>
@@ -139,7 +159,11 @@ export default function Navbar() {
                         },
                       }}
                     >
-                      <Typography variant="subtitle1" color="white" textTransform="capitalize">
+                      <Typography
+                        variant="subtitle1"
+                        color="white"
+                        textTransform="capitalize"
+                      >
                         {item.name}
                       </Typography>
                     </Button>
@@ -147,7 +171,9 @@ export default function Navbar() {
                 })}
             </Stack>
             {isLoggedIn ? (
-              <ProfileMenu picLink={BACKEND + "/uploads/avatars/" + user?.avatar} />
+              <ProfileMenu
+                picLink={BACKEND + "/uploads/avatars/" + user?.avatar}
+              />
             ) : (
               <Button
                 variant="outlined"

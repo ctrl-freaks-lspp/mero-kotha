@@ -1,6 +1,15 @@
 "use client";
 
-import { Avatar, Container, FormControl, OutlinedInput, Stack, Typography, Button, Box } from "@mui/material";
+import {
+  Avatar,
+  Container,
+  FormControl,
+  OutlinedInput,
+  Stack,
+  Typography,
+  Button,
+  Box,
+} from "@mui/material";
 import HeaderBox from "../components/headerBox";
 import { useAuth } from "../utils/context/authContext";
 import { BACKEND } from "../utils/constants";
@@ -29,7 +38,7 @@ export default function Profile() {
       const response = await axios.patch(
         `${BACKEND}/user/update/${user?.id}`,
         { name, email, phone },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       console.log(response);
       Toast("success", "Profile updated successfully!");
@@ -66,8 +75,16 @@ export default function Profile() {
     <>
       <HeaderBox title="Profile" />
       <Container sx={{ marginY: 10, width: "80%" }}>
-        <Stack direction="row" alignItems="start" justifyContent="space-between" gap={8}>
-          <img src={BACKEND + "/uploads/avatars/" + user?.avatar} alt="user profile image" />
+        <Stack
+          direction="row"
+          alignItems="start"
+          justifyContent="space-between"
+          gap={8}
+        >
+          <img
+            src={BACKEND + "/uploads/avatars/" + user?.avatar}
+            alt="user profile image"
+          />
           <Stack justifyContent="flex-start" gap={5} marginY={3}>
             <Stack direction="row" gap={3} alignItems="center">
               <Box
@@ -79,10 +96,16 @@ export default function Profile() {
                   justifyContent: "center",
                 }}
               >
-                <PermIdentityOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                <PermIdentityOutlinedIcon
+                  sx={{ color: "#fb6749", fontSize: 30 }}
+                />
               </Box>
               <FormControl sx={{ width: "60ch" }}>
-                <OutlinedInput sx={{ fontSize: 18 }} value={name} onChange={(e) => setName(e.target.value)} />
+                <OutlinedInput
+                  sx={{ fontSize: 18 }}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </FormControl>
             </Stack>
             <Stack direction="row" gap={3} alignItems="center">
@@ -95,10 +118,16 @@ export default function Profile() {
                   justifyContent: "center",
                 }}
               >
-                <MailOutlineOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                <MailOutlineOutlinedIcon
+                  sx={{ color: "#fb6749", fontSize: 30 }}
+                />
               </Box>
               <FormControl sx={{ width: "60ch" }}>
-                <OutlinedInput sx={{ fontSize: 18 }} value={email} onChange={(e) => setEmail(e.target.value)} />
+                <OutlinedInput
+                  sx={{ fontSize: 18 }}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </FormControl>
             </Stack>
             <Stack direction="row" gap={3} alignItems="center">
@@ -111,10 +140,16 @@ export default function Profile() {
                   justifyContent: "center",
                 }}
               >
-                <LocalPhoneOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                <LocalPhoneOutlinedIcon
+                  sx={{ color: "#fb6749", fontSize: 30 }}
+                />
               </Box>
               <FormControl sx={{ width: "60ch" }}>
-                <OutlinedInput sx={{ fontSize: 18 }} value={phone} onChange={(e) => setPhone(+e.target.value)} />
+                <OutlinedInput
+                  sx={{ fontSize: 18 }}
+                  value={phone}
+                  onChange={(e) => setPhone(+e.target.value)}
+                />
               </FormControl>
             </Stack>
 

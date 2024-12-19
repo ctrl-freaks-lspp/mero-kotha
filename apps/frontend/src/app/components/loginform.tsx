@@ -1,6 +1,15 @@
 "use client";
 
-import { Container, Box, TextField, Stack, FormControlLabel, Button, Typography, Checkbox } from "@mui/material";
+import {
+  Container,
+  Box,
+  TextField,
+  Stack,
+  FormControlLabel,
+  Button,
+  Typography,
+  Checkbox,
+} from "@mui/material";
 import { useRouter } from "next/router";
 
 export default function LoginForm({
@@ -57,9 +66,21 @@ export default function LoginForm({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Stack direction="row" gap={0} justifyContent="space-between" alignItems="center" mt={2}>
-            <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me" />
-            <Button variant="text" sx={{ color: "#fb6749", textTransform: "capitalize" }}>
+          <Stack
+            direction="row"
+            gap={0}
+            justifyContent="space-between"
+            alignItems="center"
+            mt={2}
+          >
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              variant="text"
+              sx={{ color: "#fb6749", textTransform: "capitalize" }}
+            >
               Forgot Password?
             </Button>
           </Stack>

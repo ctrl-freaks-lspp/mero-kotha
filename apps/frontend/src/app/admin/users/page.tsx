@@ -26,7 +26,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Image from "next/image";
 import { UserType } from "@/app/interface/userType";
 
-const Columns = ["id", "Avatar", "Email", "Name", "Phone Number", "Is Admin?", "Created At", "Updated At", "Actions"];
+const Columns = [
+  "id",
+  "Avatar",
+  "Email",
+  "Name",
+  "Phone Number",
+  "Is Admin?",
+  "Created At",
+  "Updated At",
+  "Actions",
+];
 
 export default function AdminUsers() {
   const { user, isLoggedIn, isLoading, login, logout } = useAuth();
@@ -47,7 +57,9 @@ export default function AdminUsers() {
     if (id) {
       console.log("Delete called for listing id ", id);
       try {
-        const response = await axios.delete(`${BACKEND}/user/delete/${id}`, { withCredentials: true });
+        const response = await axios.delete(`${BACKEND}/user/delete/${id}`, {
+          withCredentials: true,
+        });
         if (response.statusText === "OK") {
           Toast("success", "Deleted successfully!");
           fetchData();
@@ -80,7 +92,14 @@ export default function AdminUsers() {
 
       {user && user.role === 1 && (
         <>
-          <Stack sx={{ margin: 3, minWidth: "95%", alignItems: "center", justifyContent: "center" }}>
+          <Stack
+            sx={{
+              margin: 3,
+              minWidth: "95%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <TableContainer component={Paper} elevation={8}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
                 <TableHead>
@@ -114,29 +133,37 @@ export default function AdminUsers() {
                           <TableCell>{item.email}</TableCell>
                           <TableCell>{item.name}</TableCell>
                           <TableCell>{item.phone}</TableCell>
-                          <TableCell>{item.role === 1 ? "Admin" : "User"}</TableCell>
+                          <TableCell>
+                            {item.role === 1 ? "Admin" : "User"}
+                          </TableCell>
                           <TableCell>
                             {item.created_at
-                              ? new Date(item.created_at).toLocaleString("en-US", {
-                                  hour12: false,
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  day: "2-digit",
-                                  month: "short",
-                                  year: "2-digit",
-                                })
+                              ? new Date(item.created_at).toLocaleString(
+                                  "en-US",
+                                  {
+                                    hour12: false,
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "2-digit",
+                                  },
+                                )
                               : ""}
                           </TableCell>
                           <TableCell>
                             {item.updated_at
-                              ? new Date(item.updated_at).toLocaleString("en-US", {
-                                  hour12: false,
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                  day: "2-digit",
-                                  month: "short",
-                                  year: "2-digit",
-                                })
+                              ? new Date(item.updated_at).toLocaleString(
+                                  "en-US",
+                                  {
+                                    hour12: false,
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "2-digit",
+                                  },
+                                )
                               : ""}
                           </TableCell>
 
@@ -185,7 +212,10 @@ export default function AdminUsers() {
         <DialogContent>
           <DialogContentText component="div" id="alert-dialog-description">
             Are you sure you want to delete the listing with id{" "}
-            <Typography sx={{ fontWeight: "bold", display: "inline" }}>{selectedId}</Typography>?
+            <Typography sx={{ fontWeight: "bold", display: "inline" }}>
+              {selectedId}
+            </Typography>
+            ?
           </DialogContentText>
           <Stack justifyContent="center" alignItems="center" marginTop={2}>
             <Button

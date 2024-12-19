@@ -1,6 +1,15 @@
 "use client";
 
-import { Avatar, Container, FormControl, OutlinedInput, Stack, Typography, Button, Box } from "@mui/material";
+import {
+  Avatar,
+  Container,
+  FormControl,
+  OutlinedInput,
+  Stack,
+  Typography,
+  Button,
+  Box,
+} from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PermIdentityOutlinedIcon from "@mui/icons-material/PermIdentityOutlined";
@@ -12,12 +21,18 @@ import { Toast } from "@/app/components/toast";
 import HeaderBox from "@/app/components/headerBox";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 
-export default function UserDetails({ params }: { params: { userId: string } }) {
+export default function UserDetails({
+  params,
+}: {
+  params: { userId: string };
+}) {
   const [userData, setUserData] = useState<UserType>();
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${BACKEND}/user/${params.userId}`, { withCredentials: true });
+      const response = await axios.get(`${BACKEND}/user/${params.userId}`, {
+        withCredentials: true,
+      });
       if (response.statusText === "OK") {
         setUserData(response.data);
       }
@@ -36,8 +51,16 @@ export default function UserDetails({ params }: { params: { userId: string } }) 
 
       {userData && (
         <Container sx={{ marginY: 10, width: "80%" }}>
-          <Stack direction="row" alignItems="start" justifyContent="space-between" gap={8}>
-            <img src={BACKEND + "/uploads/avatars/" + userData.avatar} alt="user profile image" />
+          <Stack
+            direction="row"
+            alignItems="start"
+            justifyContent="space-between"
+            gap={8}
+          >
+            <img
+              src={BACKEND + "/uploads/avatars/" + userData.avatar}
+              alt="user profile image"
+            />
             <Stack justifyContent="flex-start" gap={5} marginY={3}>
               <Stack direction="row" gap={3} alignItems="center">
                 <Box
@@ -49,10 +72,16 @@ export default function UserDetails({ params }: { params: { userId: string } }) 
                     justifyContent: "center",
                   }}
                 >
-                  <PermIdentityOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                  <PermIdentityOutlinedIcon
+                    sx={{ color: "#fb6749", fontSize: 30 }}
+                  />
                 </Box>
                 <FormControl sx={{ width: "60ch" }}>
-                  <OutlinedInput sx={{ fontSize: 18 }} value={userData.name} readOnly />
+                  <OutlinedInput
+                    sx={{ fontSize: 18 }}
+                    value={userData.name}
+                    readOnly
+                  />
                 </FormControl>
               </Stack>
               <Stack direction="row" gap={3} alignItems="center">
@@ -65,10 +94,16 @@ export default function UserDetails({ params }: { params: { userId: string } }) 
                     justifyContent: "center",
                   }}
                 >
-                  <MailOutlineOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                  <MailOutlineOutlinedIcon
+                    sx={{ color: "#fb6749", fontSize: 30 }}
+                  />
                 </Box>
                 <FormControl sx={{ width: "60ch" }}>
-                  <OutlinedInput sx={{ fontSize: 18 }} value={userData.email} readOnly />
+                  <OutlinedInput
+                    sx={{ fontSize: 18 }}
+                    value={userData.email}
+                    readOnly
+                  />
                 </FormControl>
               </Stack>
               <Stack direction="row" gap={3} alignItems="center">
@@ -81,10 +116,16 @@ export default function UserDetails({ params }: { params: { userId: string } }) 
                     justifyContent: "center",
                   }}
                 >
-                  <LocalPhoneOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                  <LocalPhoneOutlinedIcon
+                    sx={{ color: "#fb6749", fontSize: 30 }}
+                  />
                 </Box>
                 <FormControl sx={{ width: "60ch" }}>
-                  <OutlinedInput sx={{ fontSize: 18 }} value={userData.phone} readOnly />
+                  <OutlinedInput
+                    sx={{ fontSize: 18 }}
+                    value={userData.phone}
+                    readOnly
+                  />
                 </FormControl>
               </Stack>
               <Stack direction="row" gap={3} alignItems="center">
@@ -103,14 +144,17 @@ export default function UserDetails({ params }: { params: { userId: string } }) 
                   <OutlinedInput
                     sx={{ fontSize: 18 }}
                     readOnly
-                    value={new Date(userData.created_at).toLocaleString("en-US", {
-                      hour12: false,
-                      hour: "numeric",
-                      minute: "numeric",
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
+                    value={new Date(userData.created_at).toLocaleString(
+                      "en-US",
+                      {
+                        hour12: false,
+                        hour: "numeric",
+                        minute: "numeric",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      },
+                    )}
                   />
                 </FormControl>
               </Stack>

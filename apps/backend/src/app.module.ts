@@ -30,8 +30,8 @@ import { ChatModule } from './chat/chat.module';
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
         synchronize: configService.get<boolean>('DATABASE_SYNC'),
-        ssl:{
-          rejectUnauthorized:false
+        ssl: {
+          rejectUnauthorized: false,
         },
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         logging: configService.get<boolean>('LOGGING'),

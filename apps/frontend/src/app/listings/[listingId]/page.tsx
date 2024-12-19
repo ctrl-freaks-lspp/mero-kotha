@@ -12,7 +12,17 @@ import { useEffect, useState } from "react";
 import Carousel from "react-spring-3d-carousel";
 import { v4 as uuidv4 } from "uuid";
 import { config } from "react-spring";
-import { Button, Container, Grid, Stack, Typography, Box, FormControl, OutlinedInput, Avatar } from "@mui/material";
+import {
+  Button,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  Box,
+  FormControl,
+  OutlinedInput,
+  Avatar,
+} from "@mui/material";
 import HotelIcon from "@mui/icons-material/Hotel";
 import ShowerIcon from "@mui/icons-material/Shower";
 import KitchenIcon from "@mui/icons-material/Kitchen";
@@ -40,7 +50,11 @@ type Props = {
 //   };
 // };
 
-export default function ListingDetails({ params }: { params: { listingId: string } }) {
+export default function ListingDetails({
+  params,
+}: {
+  params: { listingId: string };
+}) {
   const { user, isLoggedIn, isLoading, login, logout } = useAuth();
   const [listing, setListing] = useState<ListingType | null>(null);
   const [slides, setSlides] = useState<any | null>(null);
@@ -62,7 +76,9 @@ export default function ListingDetails({ params }: { params: { listingId: string
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${BACKEND}/listing/${params.listingId}`);
+        const response = await axios.get(
+          `${BACKEND}/listing/${params.listingId}`,
+        );
         if (response.statusText === "OK") {
           setListing(response.data);
 
@@ -82,7 +98,7 @@ export default function ListingDetails({ params }: { params: { listingId: string
               headers: {
                 "Content-Type": "application/json",
               },
-            }
+            },
           );
           setRecommendedPrice(price.data.Price);
         } else {
@@ -143,16 +159,28 @@ export default function ListingDetails({ params }: { params: { listingId: string
     <>
       <HeaderBox title="Listing Details" />
       <Container maxWidth="lg" sx={{ marginTop: 10 }}>
-        <Stack direction="row" gap={3} alignItems="center" justifyContent="space-between">
+        <Stack
+          direction="row"
+          gap={3}
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Typography variant="h3">{listing?.title}</Typography>
-          <Typography variant="h3">Rs. {listing?.price.toLocaleString("en-IN")}</Typography>
+          <Typography variant="h3">
+            Rs. {listing?.price.toLocaleString("en-IN")}
+          </Typography>
         </Stack>
-        <Stack direction="row" alignItems="center" justifyContent="space-between">
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Typography variant="body1" marginTop={1} marginBottom={3}>
             {listing?.city}, {listing?.district}
           </Typography>
           <Typography variant="body1" marginTop={1} marginBottom={3}>
-            (Recommended Price) Rs. {recommendPrice ? recommendPrice.toLocaleString("en-IN") : ""}
+            (Recommended Price) Rs.{" "}
+            {recommendPrice ? recommendPrice.toLocaleString("en-IN") : ""}
           </Typography>
         </Stack>
 
@@ -182,47 +210,124 @@ export default function ListingDetails({ params }: { params: { listingId: string
         )}
 
         <Container sx={{ width: "100%", height: "500px", margin: "0 auto" }}>
-          {slides && <Carousel slides={slides} showNavigation goToSlide={0} offsetRadius={2} />}
+          {slides && (
+            <Carousel
+              slides={slides}
+              showNavigation
+              goToSlide={0}
+              offsetRadius={2}
+            />
+          )}
         </Container>
 
-        <Stack marginY={14} direction="row" alignItems="flex-start" justifyContent="space-between">
+        <Stack
+          marginY={14}
+          direction="row"
+          alignItems="flex-start"
+          justifyContent="space-between"
+        >
           <Stack width="50%" height="100%">
-            <Stack direction="column" alignItems="flex-start" justifyContent="space-between" height="100%">
+            <Stack
+              direction="column"
+              alignItems="flex-start"
+              justifyContent="space-between"
+              height="100%"
+            >
               <div>
                 <Typography variant="h4">About this Property</Typography>
-                <Typography variant="subtitle1">{listing?.description}</Typography>
+                <Typography variant="subtitle1">
+                  {listing?.description}
+                </Typography>
               </div>
             </Stack>
           </Stack>
-          <Container sx={{ width: "50%", backgroundColor: "#282e38", padding: 4, borderRadius: 2 }}>
-            <Typography variant="h4" fontSize={22} color="white" fontWeight="bold" paddingTop={1} paddingBottom={2}>
+          <Container
+            sx={{
+              width: "50%",
+              backgroundColor: "#282e38",
+              padding: 4,
+              borderRadius: 2,
+            }}
+          >
+            <Typography
+              variant="h4"
+              fontSize={22}
+              color="white"
+              fontWeight="bold"
+              paddingTop={1}
+              paddingBottom={2}
+            >
               Features
             </Typography>
 
-            <Grid container rowSpacing={2.5} columnSpacing={2.5} columns={2} justifyContent="space-between">
-              <FeatureCard title="Stories" icon={CorporateFare} value={listing?.stories} />
-              <FeatureCard title="Area" icon={CropFreeIcon} value={listing?.area} />
-              <FeatureCard title="Bathroom" icon={ShowerIcon} value={listing?.bathroom} />
-              <FeatureCard title="Bedroom" icon={HotelIcon} value={listing?.bedroom} />
-              <FeatureCard title="Kitchen" icon={KitchenIcon} value={listing?.kitchen} />
-              <FeatureCard title="Parking" icon={DirectionsCarIcon} value={listing?.car_parking} />
+            <Grid
+              container
+              rowSpacing={2.5}
+              columnSpacing={2.5}
+              columns={2}
+              justifyContent="space-between"
+            >
+              <FeatureCard
+                title="Stories"
+                icon={CorporateFare}
+                value={listing?.stories}
+              />
+              <FeatureCard
+                title="Area"
+                icon={CropFreeIcon}
+                value={listing?.area}
+              />
+              <FeatureCard
+                title="Bathroom"
+                icon={ShowerIcon}
+                value={listing?.bathroom}
+              />
+              <FeatureCard
+                title="Bedroom"
+                icon={HotelIcon}
+                value={listing?.bedroom}
+              />
+              <FeatureCard
+                title="Kitchen"
+                icon={KitchenIcon}
+                value={listing?.kitchen}
+              />
+              <FeatureCard
+                title="Parking"
+                icon={DirectionsCarIcon}
+                value={listing?.car_parking}
+              />
             </Grid>
           </Container>
         </Stack>
       </Container>
 
       <Container
-        sx={{ width: "100vw", height: "60vh", backgroundColor: "#282e38", margin: 0, padding: 0, minWidth: "100%" }}
+        sx={{
+          width: "100vw",
+          height: "60vh",
+          backgroundColor: "#282e38",
+          margin: 0,
+          padding: 0,
+          minWidth: "100%",
+        }}
       >
         <Container>
-          <Typography variant="h4" sx={{ color: "white", fontWeight: "bold", paddingTop: 5 }}>
+          <Typography
+            variant="h4"
+            sx={{ color: "white", fontWeight: "bold", paddingTop: 5 }}
+          >
             Seller Details
           </Typography>
           <Stack direction="row" alignItems="start" gap={10} marginY={6}>
             <Avatar
               alt="user profile image"
               sx={{ width: 300, height: 300 }}
-              src={listing?.user.avatar ? `${BACKEND}/uploads/avatars/${listing.user.avatar}` : "/default.jpg"}
+              src={
+                listing?.user.avatar
+                  ? `${BACKEND}/uploads/avatars/${listing.user.avatar}`
+                  : "/default.jpg"
+              }
             />
             <Stack justifyContent="flex-start" gap={5} marginY={3}>
               <Stack direction="row" gap={3} alignItems="center">
@@ -235,7 +340,9 @@ export default function ListingDetails({ params }: { params: { listingId: string
                     justifyContent: "center",
                   }}
                 >
-                  <PermIdentityOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                  <PermIdentityOutlinedIcon
+                    sx={{ color: "#fb6749", fontSize: 30 }}
+                  />
                 </Box>
                 <Typography variant="h5" sx={{ color: "white" }}>
                   {listing?.user.name}
@@ -251,7 +358,9 @@ export default function ListingDetails({ params }: { params: { listingId: string
                     justifyContent: "center",
                   }}
                 >
-                  <MailOutlineOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                  <MailOutlineOutlinedIcon
+                    sx={{ color: "#fb6749", fontSize: 30 }}
+                  />
                 </Box>
                 <Typography variant="h5" sx={{ color: "white" }}>
                   {listing?.user.email}
@@ -267,7 +376,9 @@ export default function ListingDetails({ params }: { params: { listingId: string
                     justifyContent: "center",
                   }}
                 >
-                  <LocalPhoneOutlinedIcon sx={{ color: "#fb6749", fontSize: 30 }} />
+                  <LocalPhoneOutlinedIcon
+                    sx={{ color: "#fb6749", fontSize: 30 }}
+                  />
                 </Box>
                 <Typography variant="h5" sx={{ color: "white" }}>
                   +977 {listing?.user.phone}
@@ -308,7 +419,11 @@ export default function ListingDetails({ params }: { params: { listingId: string
       </Container>
 
       <Container maxWidth="lg" sx={{ paddingX: 10, marginY: 10 }}>
-        <Stack direction={{ xs: "column", sm: "row" }} justifyContent="space-between" alignItems="center">
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Stack gap={1}>
             <Typography variant="h3" fontWeight="bold">
               Other listings you may like
@@ -316,7 +431,12 @@ export default function ListingDetails({ params }: { params: { listingId: string
           </Stack>
         </Stack>
 
-        <Stack direction={{ xs: "column", sm: "row" }} alignItems="center" justifyContent="space-between" marginY={5}>
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          alignItems="center"
+          justifyContent="space-between"
+          marginY={5}
+        >
           {latestListings &&
             latestListings.map((item: any) => {
               return <ListingCard key={item.id} listing={item} />;

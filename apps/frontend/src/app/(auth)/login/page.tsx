@@ -30,9 +30,15 @@ export default function Login() {
 
     if (email === "") setEmailValidate("Email is required");
     if (password === "") setPasswordValidate("Password is required");
-    if (email !== "" && !isValidEmail(email)) setEmailValidate("Enter a valid Email Address");
+    if (email !== "" && !isValidEmail(email))
+      setEmailValidate("Enter a valid Email Address");
 
-    if (emailValidate === "" && passwordValidate === "" && isValidEmail(email) && password.length > 0) {
+    if (
+      emailValidate === "" &&
+      passwordValidate === "" &&
+      isValidEmail(email) &&
+      password.length > 0
+    ) {
       console.log("all things validated");
       login(email, password);
     }
@@ -45,18 +51,27 @@ export default function Login() {
       <HeaderBox title="Login" />
 
       <Container maxWidth="lg" sx={{ paddingX: 10, marginY: 10 }}>
-        <Stack direction="row" alignItems="start" justifyContent="space-between">
+        <Stack
+          direction="row"
+          alignItems="start"
+          justifyContent="space-between"
+        >
           <Container>
             <Typography variant="h4" mb={2}>
               Login
             </Typography>
             <Typography variant="subtitle1">
-              Welcome back! Log in to your account to access all the features. <br />
+              Welcome back! Log in to your account to access all the features.{" "}
+              <br />
               Need an account?
             </Typography>
             <Button
               variant="text"
-              sx={{ color: "#fb6749", textTransform: "capitalize", paddingX: 0 }}
+              sx={{
+                color: "#fb6749",
+                textTransform: "capitalize",
+                paddingX: 0,
+              }}
               onClick={() => router.push("/register")}
             >
               Sign Up Now!

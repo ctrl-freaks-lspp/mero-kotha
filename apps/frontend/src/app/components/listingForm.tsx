@@ -35,7 +35,10 @@ const listingSchema = Yup.object().shape({
   description: Yup.string().required("Description is required"),
   type: Yup.string()
     .required("Type is required")
-    .oneOf(["house", "land", "apartment"], 'Type must be either "house", "land", or "apartment"'),
+    .oneOf(
+      ["house", "land", "apartment"],
+      'Type must be either "house", "land", or "apartment"',
+    ),
   price: Yup.number().required("Price is required"),
   city: Yup.string().required("City is required"),
   district: Yup.string().required("District is required"),
@@ -49,7 +52,13 @@ const listingSchema = Yup.object().shape({
 
 const districts: string[] = ["Kathmandu", "Lalitpur", "Bhaktapur"];
 
-export default function ListingForm({ openDialog, handleCloseDialog }: { openDialog: any; handleCloseDialog: any }) {
+export default function ListingForm({
+  openDialog,
+  handleCloseDialog,
+}: {
+  openDialog: any;
+  handleCloseDialog: any;
+}) {
   const router = useRouter();
 
   const [previews, setPreviews] = useState<string[]>([]);
@@ -59,7 +68,9 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     accept: { "image/*": [".jpeg", ".png", ".jpg"] },
     onDrop: (acceptedFiles: File[]) => {
-      const newPreviews = acceptedFiles.map((file) => URL.createObjectURL(file));
+      const newPreviews = acceptedFiles.map((file) =>
+        URL.createObjectURL(file),
+      );
       setPreviews((prevPreviews) => [...prevPreviews, ...newPreviews]);
     },
   });
@@ -73,19 +84,25 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
     actions.setSubmitting(false);
 
     try {
-      const listingResponse = await axios.post(`${BACKEND}/listing`, values, { withCredentials: true });
+      const listingResponse = await axios.post(`${BACKEND}/listing`, values, {
+        withCredentials: true,
+      });
       if (listingResponse.status === 201) {
         const formData = new FormData();
         formData.append("id", listingResponse.data.id);
         acceptedFiles.forEach((file) => {
           formData.append("files", file);
         });
-        const imageResponse = await axios.post(`${BACKEND}/listing/upload`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
+        const imageResponse = await axios.post(
+          `${BACKEND}/listing/upload`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
           },
-          withCredentials: true,
-        });
+        );
         if (imageResponse.status === 201) {
           Toast("success", "Listing created successfully!");
           router.push("/listings/" + listingResponse.data.id);
@@ -143,7 +160,11 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
       </DialogTitle>
       <DialogContent>
         <form action="" onSubmit={formik.handleSubmit}>
-          <Stack direction="row" alignItems="stretch" justifyContent="space-evenly">
+          <Stack
+            direction="row"
+            alignItems="stretch"
+            justifyContent="space-evenly"
+          >
             <Stack gap={3} margin={3} sx={{ maxWidth: "45%" }}>
               <TextField
                 id="title"
@@ -152,8 +173,14 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                 onBlur={formik.handleBlur}
                 label="Title"
                 variant="outlined"
-                error={formik.errors.title && formik.touched.title ? true : false}
-                helperText={formik.errors.title && formik.touched.title ? formik.errors.title : ""}
+                error={
+                  formik.errors.title && formik.touched.title ? true : false
+                }
+                helperText={
+                  formik.errors.title && formik.touched.title
+                    ? formik.errors.title
+                    : ""
+                }
               />
               <TextField
                 id="description"
@@ -164,10 +191,22 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                 variant="outlined"
                 multiline
                 rows={4}
-                error={formik.errors.description && formik.touched.description ? true : false}
-                helperText={formik.errors.description && formik.touched.description ? formik.errors.description : ""}
+                error={
+                  formik.errors.description && formik.touched.description
+                    ? true
+                    : false
+                }
+                helperText={
+                  formik.errors.description && formik.touched.description
+                    ? formik.errors.description
+                    : ""
+                }
               />
-              <FormControl fullWidth variant="outlined" error={Boolean(formik.errors.type && formik.touched.type)}>
+              <FormControl
+                fullWidth
+                variant="outlined"
+                error={Boolean(formik.errors.type && formik.touched.type)}
+              >
                 <InputLabel id="type-label">Type</InputLabel>
                 <Select
                   labelId="type-label"
@@ -191,8 +230,14 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                 label="Price"
                 variant="outlined"
                 type="number"
-                error={formik.errors.price && formik.touched.price ? true : false}
-                helperText={formik.errors.price && formik.touched.price ? formik.errors.price : ""}
+                error={
+                  formik.errors.price && formik.touched.price ? true : false
+                }
+                helperText={
+                  formik.errors.price && formik.touched.price
+                    ? formik.errors.price
+                    : ""
+                }
               />
               <TextField
                 id="city"
@@ -202,12 +247,18 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                 label="City"
                 variant="outlined"
                 error={formik.errors.city && formik.touched.city ? true : false}
-                helperText={formik.errors.city && formik.touched.city ? formik.errors.city : ""}
+                helperText={
+                  formik.errors.city && formik.touched.city
+                    ? formik.errors.city
+                    : ""
+                }
               />
               <FormControl
                 fullWidth
                 variant="outlined"
-                error={Boolean(formik.errors.district && formik.touched.district)}
+                error={Boolean(
+                  formik.errors.district && formik.touched.district,
+                )}
               >
                 <InputLabel>District</InputLabel>
                 <Select
@@ -227,9 +278,16 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                     );
                   })}
                 </Select>
-                {formik.errors.district && <FormHelperText>{formik.errors.district}</FormHelperText>}
+                {formik.errors.district && (
+                  <FormHelperText>{formik.errors.district}</FormHelperText>
+                )}
               </FormControl>
-              <Stack direction="row" alignContent="center" justifyContent="space-between" gap={3}>
+              <Stack
+                direction="row"
+                alignContent="center"
+                justifyContent="space-between"
+                gap={3}
+              >
                 <TextField
                   id="area"
                   value={formik.values.area}
@@ -238,8 +296,14 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                   label="Area (Aana)"
                   variant="outlined"
                   type="number"
-                  error={formik.errors.area && formik.touched.area ? true : false}
-                  helperText={formik.errors.area && formik.touched.area ? formik.errors.area : ""}
+                  error={
+                    formik.errors.area && formik.touched.area ? true : false
+                  }
+                  helperText={
+                    formik.errors.area && formik.touched.area
+                      ? formik.errors.area
+                      : ""
+                  }
                 />
                 <TextField
                   id="stories"
@@ -249,8 +313,16 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                   label="Stories"
                   variant="outlined"
                   type="number"
-                  error={formik.errors.stories && formik.touched.stories ? true : false}
-                  helperText={formik.errors.stories && formik.touched.stories ? formik.errors.stories : ""}
+                  error={
+                    formik.errors.stories && formik.touched.stories
+                      ? true
+                      : false
+                  }
+                  helperText={
+                    formik.errors.stories && formik.touched.stories
+                      ? formik.errors.stories
+                      : ""
+                  }
                 />
                 <TextField
                   id="bedroom"
@@ -260,11 +332,24 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                   label="Bedroom"
                   variant="outlined"
                   type="number"
-                  error={formik.errors.bedroom && formik.touched.bedroom ? true : false}
-                  helperText={formik.errors.bedroom && formik.touched.bedroom ? formik.errors.bedroom : ""}
+                  error={
+                    formik.errors.bedroom && formik.touched.bedroom
+                      ? true
+                      : false
+                  }
+                  helperText={
+                    formik.errors.bedroom && formik.touched.bedroom
+                      ? formik.errors.bedroom
+                      : ""
+                  }
                 />
               </Stack>
-              <Stack direction="row" alignContent="center" justifyContent="space-between" gap={3}>
+              <Stack
+                direction="row"
+                alignContent="center"
+                justifyContent="space-between"
+                gap={3}
+              >
                 <TextField
                   id="bathroom"
                   value={formik.values.bathroom}
@@ -273,8 +358,16 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                   label="Bathroom"
                   variant="outlined"
                   type="number"
-                  error={formik.errors.bathroom && formik.touched.bathroom ? true : false}
-                  helperText={formik.errors.bathroom && formik.touched.bathroom ? formik.errors.bathroom : ""}
+                  error={
+                    formik.errors.bathroom && formik.touched.bathroom
+                      ? true
+                      : false
+                  }
+                  helperText={
+                    formik.errors.bathroom && formik.touched.bathroom
+                      ? formik.errors.bathroom
+                      : ""
+                  }
                 />
                 <TextField
                   id="kitchen"
@@ -284,8 +377,16 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                   label="Kitchen"
                   variant="outlined"
                   type="number"
-                  error={formik.errors.kitchen && formik.touched.kitchen ? true : false}
-                  helperText={formik.errors.kitchen && formik.touched.kitchen ? formik.errors.kitchen : ""}
+                  error={
+                    formik.errors.kitchen && formik.touched.kitchen
+                      ? true
+                      : false
+                  }
+                  helperText={
+                    formik.errors.kitchen && formik.touched.kitchen
+                      ? formik.errors.kitchen
+                      : ""
+                  }
                 />
                 <TextField
                   id="car_parking"
@@ -295,12 +396,28 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                   label="Car Parking"
                   variant="outlined"
                   type="number"
-                  error={formik.errors.car_parking && formik.touched.car_parking ? true : false}
-                  helperText={formik.errors.car_parking && formik.touched.car_parking ? formik.errors.car_parking : ""}
+                  error={
+                    formik.errors.car_parking && formik.touched.car_parking
+                      ? true
+                      : false
+                  }
+                  helperText={
+                    formik.errors.car_parking && formik.touched.car_parking
+                      ? formik.errors.car_parking
+                      : ""
+                  }
                 />
               </Stack>
-              <Stack direction="row" alignItems="center" justifyContent="space-between">
-                <TextField value={recommended_price || ""} label="Recommended Price" type="number" />
+              <Stack
+                direction="row"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <TextField
+                  value={recommended_price || ""}
+                  label="Recommended Price"
+                  type="number"
+                />
                 <Button
                   fullWidth
                   type="button"
@@ -323,7 +440,7 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
                           headers: {
                             "Content-Type": "application/json",
                           },
-                        }
+                        },
                       );
                       setRecommendedPrice(response.data.Price);
                     } catch (error) {
@@ -354,13 +471,27 @@ export default function ListingForm({ openDialog, handleCloseDialog }: { openDia
               <p>Drag n drop some files here, or click to select files</p>
             </ButtonBase> */}
             <Box
-              sx={{ p: 2, border: "1px dashed grey", minHeight: "100%", flexGrow: 1, marginY: 3, marginX: "24px" }}
+              sx={{
+                p: 2,
+                border: "1px dashed grey",
+                minHeight: "100%",
+                flexGrow: 1,
+                marginY: 3,
+                marginX: "24px",
+              }}
               {...getRootProps({ className: "dropzone" })}
             >
-              <Stack alignItems="center" justifyContent="center" height="100%" gap={4}>
+              <Stack
+                alignItems="center"
+                justifyContent="center"
+                height="100%"
+                gap={4}
+              >
                 <input {...getInputProps()} />
                 <CloudUploadIcon sx={{ fontSize: 40 }} />
-                <Typography>Drag and Drop images, or click to select images</Typography>
+                <Typography>
+                  Drag and Drop images, or click to select images
+                </Typography>
                 {/* <ul>{files}</ul> */}
                 <Stack direction="row" gap={2} flexWrap="wrap">
                   {previews.map((preview, index) => (

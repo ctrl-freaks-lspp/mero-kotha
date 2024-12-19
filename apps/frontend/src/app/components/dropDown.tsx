@@ -1,4 +1,11 @@
-import { FormControl, Stack, Typography, InputLabel, Select, MenuItem } from "@mui/material";
+import {
+  FormControl,
+  Stack,
+  Typography,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 
 export default function DropDown({
   menu,
@@ -27,15 +34,21 @@ export default function DropDown({
             size="medium"
             onChange={(event) => {
               setter(event.target.value);
-              if (label === "District") updateQueryParam("district", event.target.value);
-              if (label === "Property Type") updateQueryParam("type", event.target.value);
+              if (label === "District")
+                updateQueryParam("district", event.target.value);
+              if (label === "Property Type")
+                updateQueryParam("type", event.target.value);
               if (label === "Sort By") {
                 updateQueryParam("sortByDate", null);
                 updateQueryParam("sortByPrice", null);
-                if (event.target.value === "Newest First") updateQueryParam("sortByDate", "desc");
-                if (event.target.value === "Oldest First") updateQueryParam("sortByDate", "asc");
-                if (event.target.value === "Price Low to High") updateQueryParam("sortByPrice", "asc");
-                if (event.target.value === "Price High to Low") updateQueryParam("sortByPrice", "desc");
+                if (event.target.value === "Newest First")
+                  updateQueryParam("sortByDate", "desc");
+                if (event.target.value === "Oldest First")
+                  updateQueryParam("sortByDate", "asc");
+                if (event.target.value === "Price Low to High")
+                  updateQueryParam("sortByPrice", "asc");
+                if (event.target.value === "Price High to Low")
+                  updateQueryParam("sortByPrice", "desc");
               }
             }}
           >

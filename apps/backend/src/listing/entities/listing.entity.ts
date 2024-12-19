@@ -15,7 +15,6 @@ export class Listing {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @OneToOne(() => User, { cascade: true })
   @ManyToOne(() => User, (user) => user.listings, { cascade: true })
   @JoinColumn()
   user: User;
@@ -27,9 +26,9 @@ export class Listing {
   description: string;
 
   @Column({
-    enum: ['house', 'land', 'apartment'],
+    enum: ['house', 'floor', 'apartment'],
   })
-  type: 'house' | 'land' | 'apartment';
+  type: 'house' | 'floor' | 'apartment';
 
   @Column()
   price: number;

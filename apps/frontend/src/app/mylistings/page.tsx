@@ -6,7 +6,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND } from "../utils/constants";
 import { Toast } from "../components/toast";
-import { Container, Grid, IconButton, InputBase, Paper, Stack } from "@mui/material";
+import {
+  Container,
+  Grid,
+  IconButton,
+  InputBase,
+  Paper,
+  Stack,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ListingCard from "../components/listingCard";
 import { ListingType } from "../interface/listingType";
@@ -30,7 +37,8 @@ const initialQueryParams = {
 
 export default function MyListings() {
   const { user, isLoggedIn, isLoading, login, logout } = useAuth();
-  const [queryParams, setQueryParams] = useState<QueryParams>(initialQueryParams);
+  const [queryParams, setQueryParams] =
+    useState<QueryParams>(initialQueryParams);
   const [listings, setListings] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -43,10 +51,14 @@ export default function MyListings() {
 
   const fetchData = async (paramsUrl: string) => {
     try {
-      const response = await axios.get(`${BACKEND}/search?${paramsUrl.slice(1)}`);
+      const response = await axios.get(
+        `${BACKEND}/search?${paramsUrl.slice(1)}`,
+      );
       if (response.statusText === "OK" && user !== null) {
         // console.log(response.data);
-        const filteredList = response.data.filter((list: ListingType) => list.user.id === user.id);
+        const filteredList = response.data.filter(
+          (list: ListingType) => list.user.id === user.id,
+        );
         setListings(filteredList);
       }
     } catch (err: any) {
@@ -60,7 +72,10 @@ export default function MyListings() {
 
     const filteredParams = Object.entries(queryParams)
       .filter(([_, value]) => value !== null)
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {} as QueryParams);
+      .reduce(
+        (acc, [key, value]) => ({ ...acc, [key]: value }),
+        {} as QueryParams,
+      );
 
     for (const key in filteredParams) {
       if (Object.hasOwnProperty.call(filteredParams, key)) {
@@ -109,7 +124,13 @@ export default function MyListings() {
       </Container>
 
       <Container maxWidth="lg" sx={{ marginY: 10 }}>
-        <Grid container columns={{ xs: 1, sm: 3 }} gap={3} alignItems="center" justifyContent="center">
+        <Grid
+          container
+          columns={{ xs: 1, sm: 3 }}
+          gap={3}
+          alignItems="center"
+          justifyContent="center"
+        >
           {listings &&
             listings.map((item: any) => {
               return (

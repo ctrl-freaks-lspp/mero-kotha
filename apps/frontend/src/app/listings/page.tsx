@@ -54,7 +54,8 @@ const initialQueryParams = {
 export default function Listings() {
   const { user, isLoggedIn } = useAuth();
 
-  const [queryParams, setQueryParams] = useState<QueryParams>(initialQueryParams);
+  const [queryParams, setQueryParams] =
+    useState<QueryParams>(initialQueryParams);
   const [listings, setListings] = useState<any>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [districts, setDistricts] = useState<any>();
@@ -86,11 +87,15 @@ export default function Listings() {
 
   const fetchData = async (paramsUrl: string) => {
     try {
-      const response = await axios.get(`${BACKEND}/search?${paramsUrl.slice(1)}`);
+      const response = await axios.get(
+        `${BACKEND}/search?${paramsUrl.slice(1)}`,
+      );
       if (response.statusText === "OK") {
         // console.log(response.data);
         if (isLoggedIn && user) {
-          const filteredList = response.data.filter((listing: ListingType) => listing.user.id !== user.id);
+          const filteredList = response.data.filter(
+            (listing: ListingType) => listing.user.id !== user.id,
+          );
           setListings(filteredList);
         } else {
           setListings(response.data);
@@ -109,7 +114,9 @@ export default function Listings() {
         const response = await axios.get(`${BACKEND}/district`);
         if (response.statusText === "OK") {
           console.log("districts: ", response.data);
-          setDistricts(Object.values(response.data).map((item: any) => item.name));
+          setDistricts(
+            Object.values(response.data).map((item: any) => item.name),
+          );
         }
       } catch (err: any) {
         console.error(`Error: ${err}`);
@@ -131,7 +138,10 @@ export default function Listings() {
 
     const filteredParams = Object.entries(queryParams)
       .filter(([_, value]) => value !== null)
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {} as QueryParams);
+      .reduce(
+        (acc, [key, value]) => ({ ...acc, [key]: value }),
+        {} as QueryParams,
+      );
 
     for (const key in filteredParams) {
       if (Object.hasOwnProperty.call(filteredParams, key)) {
@@ -181,7 +191,11 @@ export default function Listings() {
 
         <Container maxWidth="md" sx={{ marginTop: 4 }}>
           <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
               <FilterAltIcon />
               <Typography paddingX={3}>Filters</Typography>
             </AccordionSummary>
@@ -201,7 +215,12 @@ export default function Listings() {
                   />
 
                   <DropDown
-                    menu={["Newest First", "Oldest First", "Price Low to High", "Price High to Low"]}
+                    menu={[
+                      "Newest First",
+                      "Oldest First",
+                      "Price Low to High",
+                      "Price High to Low",
+                    ]}
                     label="Sort By"
                     initialValue={selectedOrder}
                     setter={setSelectedOrder}
@@ -249,7 +268,13 @@ export default function Listings() {
                   justifyContent="space-between"
                   gap={3}
                 >
-                  <Stack width="100%" marginY={2} direction="row" alignItems="center" justifyContent="space-between">
+                  <Stack
+                    width="100%"
+                    marginY={2}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                  >
                     <TextField
                       type="number"
                       sx={{ m: 1 }}
@@ -325,7 +350,13 @@ export default function Listings() {
       </Container>
 
       <Container maxWidth="lg" sx={{ marginY: 10 }}>
-        <Grid container columns={{ xs: 1, sm: 3 }} gap={3} alignItems="center" justifyContent="center">
+        <Grid
+          container
+          columns={{ xs: 1, sm: 3 }}
+          gap={3}
+          alignItems="center"
+          justifyContent="center"
+        >
           {listings &&
             listings.map((item: any) => {
               return (

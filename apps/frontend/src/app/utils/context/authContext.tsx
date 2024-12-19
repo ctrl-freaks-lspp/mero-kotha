@@ -1,6 +1,12 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import axios, { AxiosError } from "axios";
 import { parseCookies, destroyCookie } from "nookies";
 import { BACKEND } from "../constants";
@@ -44,7 +50,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           email: email,
           password: password,
         },
-        { withCredentials: true }
+        { withCredentials: true },
       );
       if (response.statusText === "Created") {
         const user = await axios.get(`${BACKEND}/user/`);
@@ -63,7 +69,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const logout = async () => {
-    const response = await axios.post(`${BACKEND}/user/logout/`, {}, { withCredentials: true });
+    const response = await axios.post(
+      `${BACKEND}/user/logout/`,
+      {},
+      { withCredentials: true },
+    );
     setIsLoggedIn(false);
     if (response.statusText === "OK") setIsLoggedIn(false);
     // destroyCookie(null, "jwt");
@@ -75,7 +85,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         const { role } = parseCookies();
         if (role) {
-          const response = await axios.get(`${BACKEND}/user/`, { withCredentials: true });
+          const response = await axios.get(`${BACKEND}/user/`, {
+            withCredentials: true,
+          });
           console.log("user", response.data);
           if (response.statusText === "OK") {
             setUser(response.data);
@@ -83,7 +95,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           }
         }
       } catch (error) {
-        console.log("Error while trying to get the authenticated user: ", error);
+        console.log(
+          "Error while trying to get the authenticated user: ",
+          error,
+        );
       } finally {
         setIsLoading(false);
       }
@@ -100,5 +115,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     console.log("loggedin", isLoggedIn);
   }, [isLoggedIn]);
 
-  return <AuthContext.Provider value={{ user, isLoggedIn, isLoading, login, logout }}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider
+      value={{ user, isLoggedIn, isLoading, login, logout }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };

@@ -13,7 +13,12 @@ export default function Logout() {
       {!isLoggedIn && router.replace("/")}
       <AuthBox title="logout" />
       <Container maxWidth="lg" sx={{ marginY: 14 }}>
-        <Stack alignItems="center" justifyContent="center" textAlign="center" gap={2}>
+        <Stack
+          alignItems="center"
+          justifyContent="center"
+          textAlign="center"
+          gap={2}
+        >
           <Typography variant="h4">Are you sure you want to logout?</Typography>
           <Button
             onClick={logout}
