@@ -42,6 +42,7 @@ yarn-error.log*
 /backend/dist
 /backend/node_modules
 /backend/build
+/backend/uploads
 
 # Logs
 /backend/logs
@@ -137,3 +138,5 @@ yarn-error.log*
 ./apps/recommendation/venv
 /backend/.env
 .turbo
+
+/backend/uploads
