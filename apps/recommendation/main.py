@@ -43,6 +43,8 @@ def get_recommendation(data: dict):
 
     new_price = (int(predicted_price[0]) * 0.03 ) // 12
 
+    print("New Price Should be {}".format(new_price))
+
     return {"Price": new_price}
 
 
